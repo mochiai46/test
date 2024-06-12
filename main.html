@@ -2,29 +2,16 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Search and Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-    <h1>Search and Store</h1>
-    <form id="searchForm">
-        <input type="text" id="searchQuery" name="searchQuery" placeholder="Enter your search query...">
-        <button type="button" onclick="submitSearch()">Search</button>
+    <h1>Input Form</h1>
+    <form action="process.php" method="post">
+        <label for="inputValue">Enter something:</label>
+        <input type="text" id="inputValue" name="inputValue">
+        <input type="submit" value="Submit">
     </form>
-    <div id="results"></div>
-
-    <script>
-        function submitSearch() {
-            var query = document.getElementById('searchQuery').value;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'process.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    document.getElementById('results').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send('query=' + encodeURIComponent(query));
-        }
-    </script>
+    
 </body>
 </html>
