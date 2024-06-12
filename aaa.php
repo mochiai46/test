@@ -1,30 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>PHP Azure DB Connection</title>
-</head>
-<body>
-    <h1>Azure Database Connection Test</h1>
-    <?php
-    // データベース接続情報
-    $host = 'momo-mysql.mysql.database.azure.com';
-    $db = 'momoDataBase';
-    $user = 'momouzer';
-    $pass = 'Admintest1';
-    $charset = 'utf8mb4';
+<?php
+// PHP Data Objects(PDO) Sample Code:
+try {
+    $conn = new PDO("sqlsrv:server = tcp:koko.database.windows.net,1433; Database = kokoDataBase", "koko-sql", "Admintest1");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $e) {
+    print("Error connecting to SQL Server.");
+    die(print_r($e));
+}
 
-    // データベース接続
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    try {
-        $pdo = new PDO($dsn, $user, $pass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ]);
-        echo "<p>接続に成功しました！</p>";
-    } catch (\PDOException $e) {
-        throw new \PDOException($e->getMessage(), (int)$e->getCode());
-    }
-    ?>
-</body>
-</html>
+// SQL Server Extension Sample Code:
+$connectionInfo = array("UID" => "koko-sql", "pwd" => "Admintest1", "Database" => "kokoDataBase", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$serverName = "tcp:koko.database.windows.net,1433";
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+?>
