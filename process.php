@@ -15,6 +15,6 @@
         echo "<p>No value entered.</p>";
     }
     ?>
-    
+
 </body>
 </html>
